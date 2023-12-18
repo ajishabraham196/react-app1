@@ -32,7 +32,7 @@ const State = () => {
       setUsers(users);
     } catch (error) {
       console.log(error);
-      console.log(error);
+      
     }
   };
 
