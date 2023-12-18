@@ -59,7 +59,7 @@ const State = () => {
         );
       })}
 
-      <h1>Number of times : {count} </h1>
+      <h1>Number of times : {count}  : </h1>
       <button
         className="btn"
         onClick={() => {
