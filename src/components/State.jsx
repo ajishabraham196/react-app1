@@ -16,6 +16,7 @@ const books = [
 const State = () => {
   const [count, setCount] = useState(0);
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const url = "https://api.github.com/users";
 
@@ -30,9 +31,12 @@ const State = () => {
       const users = await respone.json();
       console.log(users);
       setUsers(users);
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
     } catch (error) {
       console.log(error);
-      
     }
   };
 
@@ -41,12 +45,27 @@ const State = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {books.map((book) => {
         return <h3 key={book.author}>{book.author}</h3>;
       })}
 
-      {users.map((user) => {
+      {isLoading === false ? (
+        users.map((user) => {
+          return (
+            <div className="container" key={user.login}>
+              <div className="col-5">
+                <h3>{user.login}</h3>
+                <img src={user.avatar_url} width={100} height={100} />
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <div>Loading</div>
+      )}
+
+      {/* {users.map((user) => {
         return (
           <>
             <div className="container">
@@ -57,9 +76,8 @@ const State = () => {
             </div>
           </>
         );
-      })}
-
-      <h1>Number of times : {count}  : </h1>
+      })} */}
+      <h1>Number of times : {count} : </h1>
       <button
         className="btn"
         onClick={() => {
@@ -68,7 +86,7 @@ const State = () => {
       >
         Click Me
       </button>
-    </div>
+    </>
   );
 };
 
