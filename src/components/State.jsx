@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Form from "./Form";
 
 const books = [
   {
@@ -13,12 +14,35 @@ const books = [
   },
 ];
 
+const data = [
+  {
+    id: 2,
+    name: "Mariam Abraham",
+    AddressInfo: [
+      {
+        house: {
+          name: "Kurikilum Kinnel",
+        },
+      },
+    ],
+  },
+];
+
 const State = () => {
   const [count, setCount] = useState(0);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const Test = () => {
+    console.log("invoked");
+  };
+
   const url = "https://api.github.com/users";
+
+  const Housename = data?.[0]?.AddressInfo?.[0]?.house?.name || "test";
+
+  console.log(Housename);
+  //console.log(data[0].AddressInfo[0].house.name);
 
   const handleClick = (id) => {
     console.log(id);
@@ -46,6 +70,7 @@ const State = () => {
 
   return (
     <>
+      <Form />
       {books.map((book) => {
         return <h3 key={book.author}>{book.author}</h3>;
       })}
